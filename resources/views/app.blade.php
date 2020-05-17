@@ -13,10 +13,7 @@
 <body>
     <div id="app">
         <app-nav></app-nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <router-view></router-view>
     </div>
 </body>
 </html>
