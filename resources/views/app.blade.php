@@ -8,6 +8,7 @@
     <title>{{ config('app.name', 'Cubik3') }}</title>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -15,5 +16,10 @@
         <app-nav></app-nav>
         <router-view></router-view>
     </div>
+    @if ($user)
+        <script type="application/json" id="userData">
+            @json($user)
+        </script>
+    @endif
 </body>
 </html>

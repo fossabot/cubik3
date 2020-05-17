@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1><b>404</b> Not Found</h1>
-        <p>The page you requested is not available.</p>
+    <div class="container py-4 lg:py-6">
+        <h1 class="text-3xl"><b>404</b> Not Found</h1>
+        <p class="text-lg">The page you requested is not available.</p>
     </div>
 </template>

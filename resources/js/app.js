@@ -2,6 +2,7 @@ import _ from 'lodash';
 import axios from 'axios';
 import Vue from 'vue';
 import router from './router';
+import store from './vuex-store';
 
 // Make basic libraries accessible globally
 window._ = _;
@@ -13,7 +14,15 @@ window.Vue = Vue;
 const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
+// Set user in store
+const el = document.querySelector('#userData');
+if (el) {
+    const user = JSON.parse(el.innerHTML);
+    store.commit('setUser', user);
+}
+
 // Initialize app
-new Vue({
+const app = new Vue({
     router,
+    store,
 }).$mount('#app');

@@ -17,6 +17,7 @@ Add your database connection information to the `.env` file, then continue:
 
 ```bash
 php artisan migrate
+php artisan storage:link
 npm run dev
 ```
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class AppController extends Controller
 {
     /**
@@ -11,6 +13,8 @@ class AppController extends Controller
      */
     public function app()
     {
-        return view('app');
+        return view('app', [
+            'user' => Auth::user(),
+        ]);
     }
 }
