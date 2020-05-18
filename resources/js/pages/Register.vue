@@ -54,7 +54,7 @@
                         autocomplete="email"
                         v-model="email">
                 </div>
-                <div>
+                <div class="mb-3">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                         Password
                     </label>
@@ -64,8 +64,21 @@
                         type="password"
                         required
                         placeholder="Password"
-                        autocomplete="current-password"
+                        autocomplete="new-password"
                         v-model="password">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirmation">
+                        Confirm password
+                    </label>
+                    <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
+                        id="password_confirmation"
+                        name="password_confirmation"
+                        type="password"
+                        required
+                        placeholder="Confirm password"
+                        autocomplete="new-password"
+                        v-model="passwordConfirmation">
                 </div>
 
                 <div class="mt-6 flex items-center justify-between">
@@ -85,6 +98,7 @@ export default {
         username: '',
         email: '',
         password: '',
+        passwordConfirmation: '',
     }),
     methods: {
         logIn() {
@@ -93,6 +107,7 @@ export default {
                 username: this.username,
                 email: this.email,
                 password: this.password,
+                password_confirmation: this.passwordConfirmation,
             }).then(async response => {
                 const user = response.data;
                 this.$store.commit('setUser', user);

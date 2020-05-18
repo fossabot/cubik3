@@ -18,6 +18,10 @@ Route::post('/login', 'AuthController@login');
 Route::post('/logout', 'AuthController@logout');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', 'UserController@showMe');
-    Route::get('/user/{user:username}', 'UserController@show');
+    Route::get('/users/@{user:username}', 'UserController@show');
+
+    Route::post('/posts', 'PostController@store');
+    Route::get('/posts/home', 'PostController@showHome');
+    Route::get('/posts/{post}', 'PostController@show');
+    Route::get('/users/@{user:username}/posts', 'PostController@showUser');
 });

@@ -1,12 +1,18 @@
 <template>
     <div class="container py-4 lg:py-6">
-        <h1 class="text-3xl">User</h1>
+        <h1 class="text-3xl" v-if="user">
+            {{ user.name }}
+        </h1>
         <div v-if="loading">
-            Loading&hellip;
+            <post-card-placeholder class="my-4 lg:my-5 opacity-100" />
+            <post-card-placeholder class="my-4 lg:my-5 opacity-75" />
+            <post-card-placeholder class="my-4 lg:my-5 opacity-50" />
         </div>
         <div v-else>
-            <p class="text-lg">ID: {{ user.id }}</p>
-            <p class="text-lg">User: {{ user.name }}</p>
+            <post-card class="my-4 lg:my-5"
+                v-for="post in posts"
+                :key="post.id"
+                :post="post" />
         </div>
     </div>
 </template>
@@ -16,15 +22,27 @@ export default {
     data: () => ({
         loading: true,
         user: null,
+        posts: [],
+        page: 0,
+        lastPage: 0,
     }),
     methods: {
         async fetchUser() {
             this.user = null;
             const username = this.$route.params.user;
             // TODO: handle errors loading user
-            const response = await axios.get(`/api/user/${username}`);
+            const response = await axios.get(`/api/users/@${username}`);
             this.user = response.data;
+            // TODO: handle errors loading posts
+            const postResponse = await axios.get(`/api/users/@${username}/posts`);
+            const { data } = postResponse;
+            this.posts = data.data;
+            this.page = data.page;
+            this.lastPage = data.lastPage;
             this.loading = false;
+        },
+        async fetchPosts() {
+            // TODO: fetch more posts when scrolling
         },
     },
     watch: {

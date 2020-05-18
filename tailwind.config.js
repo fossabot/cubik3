@@ -7,6 +7,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        dark: {'raw': '(prefers-color-scheme: dark)'},
+      },
     },
     container: {
       padding: '1rem',

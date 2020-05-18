@@ -14,4 +14,21 @@ class Post extends Model
     protected $fillable = [
         'content',
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'updated_at',
+    ];
+
+    /**
+     * The user that created a post.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

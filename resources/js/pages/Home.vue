@@ -1,19 +1,53 @@
 <template>
     <div class="container py-4 lg:py-6">
-        <h1 class="text-3xl">Home</h1>
         <p class="text-lg">Hello, {{ user.name }}!</p>
+        <post-form class="mt-3" />
+        <div v-if="loading">
+            <post-card-placeholder class="my-4 lg:my-5 opacity-100" />
+            <post-card-placeholder class="my-4 lg:my-5 opacity-75" />
+            <post-card-placeholder class="my-4 lg:my-5 opacity-50" />
+        </div>
+        <div v-else>
+            <post-card class="my-4 lg:my-5"
+                v-for="post in posts"
+                :key="post.id"
+                :post="post" />
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    data: () => ({
+        loading: false,
+        posts: [],
+        page: 0,
+        lastPage: 0,
+    }),
     computed: {
         user() {
             return this.$store.state.user;
         },
     },
+    methods: {
+        fetchPosts() {
+            this.loading = true;
+            axios.get('/api/posts/home')
+                .then(response => {
+                    const { data } = response;
+                    this.posts = data.data;
+                    this.page = data.page;
+                    this.lastPage = data.last_page;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            // TODO: fetch more posts when scrolling
+        },
+    },
     mounted() {
-        //
+        this.fetchPosts();
     },
 };
 </script>
