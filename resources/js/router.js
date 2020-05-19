@@ -5,6 +5,7 @@ import store from './vuex-store';
 
 import Error404 from './pages/Error404.vue';
 import Home from './pages/Home.vue';
+import Index from './pages/Index.vue';
 import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
 import User from './pages/User.vue';
@@ -14,6 +15,11 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: 'history',
     routes: [
+        {
+            path: '/',
+            component: Index,
+            meta: { unauthorized: true },
+        },
         {
             path: '/login',
             component: Login,

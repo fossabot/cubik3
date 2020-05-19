@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-gray-800">
+    <nav class="sticky top-0 bg-gray-800">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-16">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex">
-                            <router-link to="/home" class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" active-class="text-white bg-gray-900">
+                            <router-link :to="user ? '/home' : '/'" class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" exact-active-class="text-white bg-gray-900">
                                 Home
                             </router-link>
                         </div>
@@ -84,9 +84,9 @@
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
                     v-else>
                     <router-link to="/login" class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
-                        Log in
+                        Sign in
                     </router-link>
-                    <router-link to="/register" class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out">
+                    <router-link to="/register" class="px-3 py-2 ml-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
                         Create Account
                     </router-link>
                 </div>
@@ -104,9 +104,10 @@
         <div class="absolute inset-0"
             @click="userOpen = false"
             v-show="userOpen"
+            v-if="user"
         ></div>
 
-        <post-modal :show.sync="postModalOpen" dismissable />
+        <post-modal v-if="user" :show.sync="postModalOpen" dismissable />
     </nav>
 </template>
 

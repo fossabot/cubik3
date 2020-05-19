@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-4 lg:py-6">
+    <div class="container py-4 lg:py-6 mb-8">
         <div class="max-w-md w-full mx-auto">
             <div>
                 <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
@@ -14,72 +14,39 @@
             </div>
             <form class="mt-8" method="POST" @submit.prevent="logIn">
                 <input type="hidden" name="remember" value="true">
-                <div class="mb-3">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Display Name
-                    </label>
-                    <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        placeholder="Display Name"
-                        autocomplete="name"
-                        ref="name"
-                        v-model="name">
-                </div>
-                <div class="mb-3">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Username
-                    </label>
-                    <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
-                        id="email"
-                        name="email"
-                        type="text"
-                        required
-                        placeholder="Username"
-                        autocomplete="username"
-                        v-model="username">
-                </div>
-                <div class="mb-3">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Email address
-                    </label>
-                    <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder="Email address"
-                        autocomplete="email"
-                        v-model="email">
-                </div>
-                <div class="mb-3">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                        Password
-                    </label>
-                    <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
-                        id="password"
-                        name="password"
-                        type="password"
-                        required
-                        placeholder="Password"
-                        autocomplete="new-password"
-                        v-model="password">
-                </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirmation">
-                        Confirm password
-                    </label>
-                    <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10"
-                        id="password_confirmation"
-                        name="password_confirmation"
-                        type="password"
-                        required
-                        placeholder="Confirm password"
-                        autocomplete="new-password"
-                        v-model="passwordConfirmation">
-                </div>
+                <input-text class="mb-4"
+                    label="Display name"
+                    type="text"
+                    autocomplete="name"
+                    required
+                    v-model="name"
+                    :error="nameError" />
+                <input-text class="mb-4"
+                    label="Username"
+                    type="text"
+                    autocomplete="username"
+                    required
+                    v-model="username"
+                    :error="usernameError" />
+                <input-text class="mb-4"
+                    label="Email address"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    v-model="email"
+                    :error="emailError" />
+                <input-text class="mb-4"
+                    label="Password"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                    v-model="password"
+                    :error="passwordError" />
+                <input-text label="Confirm password"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                    v-model="passwordConfirmation" />
 
                 <div class="mt-6 flex items-center justify-between">
                     <button type="submit" class="group py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
@@ -95,9 +62,13 @@
 export default {
     data: () => ({
         name: '',
+        nameError: '',
         username: '',
+        usernameError: '',
         email: '',
+        emailError: '',
         password: '',
+        passwordError: '',
         passwordConfirmation: '',
     }),
     methods: {
