@@ -61,7 +61,6 @@ export default {
             }).then(response => {
                 const user = response.data;
                 this.$store.commit('setUser', user);
-                // TODO: check redirect param and go there if set
                 let to = '/home';
                 if (this.$route.query.redirect) {
                     to = this.$route.query.redirect;

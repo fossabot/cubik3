@@ -20,7 +20,8 @@
                     autocomplete="name"
                     required
                     v-model="name"
-                    :error="nameError" />
+                    :error="nameError"
+                    ref="name" />
                 <input-text class="mb-4"
                     label="Username"
                     type="text"
@@ -73,6 +74,11 @@ export default {
     }),
     methods: {
         logIn() {
+            this.nameError = '';
+            this.usernameError = '';
+            this.emailError = '';
+            this.passwordError = '';
+
             axios.post('/api/register', {
                 name: this.name,
                 username: this.username,
@@ -83,10 +89,22 @@ export default {
                 const user = response.data;
                 this.$store.commit('setUser', user);
                 let to = '/home';
+                if (this.$route.query.redirect) {
+                    to = this.$route.query.redirect;
+                }
                 this.$router.push(to);
             }).catch(error => {
-                // TODO: show error detail in form
                 console.error(error);
+                this.$refs.email.focus();
+                if (error.response) {
+                    const { errors } = error.response.data;
+                    this.nameError = errors.name ? errors.name[0] : null;
+                    this.usernameError = errors.username ? errors.username[0] : null;
+                    this.emailError = errors.email ? errors.email[0] : null;
+                    this.passwordError = errors.password ? errors.password[0] : null;
+                } else {
+                    this.nameError = 'An unknown error occurred signing in. Please try again.';
+                }
             });
         },
     },
