@@ -14,6 +14,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $user->makeHidden(['email', 'email_verified_at', 'created_at', 'updated_at']);
         return $user;
     }
 }

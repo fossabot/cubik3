@@ -38,6 +38,21 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that should be appended for arrays.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'gravatar',
+    ];
+
+    public function getGravatarAttribute()
+    {
+        $hash = md5($this->email);
+        return "https://www.gravatar.com/avatar/$hash";
+    }
+
+    /**
      * The posts created by the user.
      */
     public function posts()
@@ -59,5 +74,15 @@ class User extends Authenticatable
     public function followers()
     {
         return $this->belongsToMany(User::class, 'user_follows', 'followed_user_id', 'user_id');
+    }
+
+    /**
+     * Hide any attributes that should be private.
+     */
+    public function hidePrivateAttributes()
+    {
+        return $this->makeHidden([
+            'email', 'email_verified_at', 'created_at', 'updated_at',
+        ]);
     }
 }

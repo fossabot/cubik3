@@ -26,7 +26,8 @@ class PostController extends Controller
             'content' => $request->input('content'),
         ]);
 
-        $post->load('user:id,name,username');
+        $post->load('user:id,name,username,email');
+        $post->user->hidePrivateAttributes();
         return $post;
     }
 
@@ -37,7 +38,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load('user:id,name,username');
+        $post->load('user:id,name,username,email');
+        $post->user->hidePrivateAttributes();
         return $post;
     }
 
@@ -55,10 +57,13 @@ class PostController extends Controller
             ->pluck('id')
             ->all();
         $userIds[] = $user->id;
-        $posts = Post::with('user:id,name,username')
+        $posts = Post::with('user:id,name,username,email')
             ->whereIn('user_id', $userIds)
             ->latest()
             ->paginate(30);
+        foreach ($posts as $post) {
+            $post->user->hidePrivateAttributes();
+        }
         return $posts;
     }
 
@@ -70,9 +75,12 @@ class PostController extends Controller
     public function showUser(User $user)
     {
         $posts = $user->posts()
-            ->with('user:id,name,username')
+            ->with('user:id,name,username,email')
             ->latest()
             ->paginate(30);
+        foreach ($posts as $post) {
+            $post->user->hidePrivateAttributes();
+        }
         return $posts;
     }
 }
