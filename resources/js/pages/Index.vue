@@ -1,6 +1,6 @@
 <template>
     <div class="text-center py-5 md:py-16 lg:py-24 px-4">
-        <h1 class="text-4xl font-extrabold tracking-tight text-blue-600 mb-4 md:mb-6 sm:text-5xl sm:leading-none md:text-6xl">
+        <h1 class="text-4xl font-extrabold tracking-tight text-blue-600 mb-4 md:mb-6 sm:text-5xl sm:leading-none md:text-6xl dark:text-blue-500">
             Welcome
         </h1>
         <p class="text-lg">Join the network to post, follow buddies, and find new ones!</p>
@@ -12,7 +12,7 @@
                     </router-link>
                 </div>
                 <div class="mt-3 sm:mt-0 sm:ml-3 rounded-md shadow">
-                    <router-link to="/login" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-blue-700 bg-white hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+                    <router-link to="/login" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-blue-700 bg-white hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-gray-100">
                         Sign in
                     </router-link>
                 </div>

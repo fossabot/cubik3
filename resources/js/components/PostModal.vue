@@ -10,7 +10,7 @@
             <div class="fixed inset-0 transition-opacity"
                 v-show="show"
                 @click="overlayClick">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                <div class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
             </div>
         </transition>
 
@@ -21,14 +21,17 @@
             leave-active-class="ease-in duration-200"
             leave-class="opacity-100 translate-y-0 sm:scale-100"
             leave-to-class="opacity-0 -translate-y-4 sm:translate-y-0 sm:scale-95">
-            <form class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline"
+            <form class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full dark:bg-gray-800"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-headline"
                 v-show="show"
                 ref="form"
                 @submit.prevent="submit">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="flex items-start">
                         <img class="w-10 h-10 rounded-full mr-3" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" :alt="`Avatar of ${user.name}`">
-                        <textarea class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+                        <textarea class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-600 dark:placeholder-gray-400"
                             aria-label="Write a post"
                             name="content"
                             id="content"
@@ -37,17 +40,19 @@
                             ref="content"
                             v-model="content"
                             placeholder="What's up?"
+                            @keyup.ctrl.enter="submit"
+                            @keyup.meta.enter="submit"
                         ></textarea>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 flex flex-row-reverse sm:px-6 sm:pb-4">
+                <div class="bg-gray-50 px-4 py-3 flex flex-row-reverse sm:px-6 sm:pb-4 dark:bg-gray-700 dark:bg-opacity-50">
                     <span class="flex w-auto rounded-md shadow-sm ml-3">
                         <button type="submit" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             Post
                         </button>
                     </span>
                     <span class="flex w-auto rounded-md shadow-sm">
-                        <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5" @click="close">
+                        <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5 dark:shadow-none dark:bg-transparent dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-gray-100 dark:border-0" @click="close">
                             Cancel
                         </button>
                     </span>
@@ -105,6 +110,7 @@ export default {
             }).then(response => {
                 // TODO: reload posts if on a relevant page
                 this.$refs.form.reset();
+                this.$emit('newPost', response.data);
                 this.close();
             }).catch(error => {
                 console.error(error);

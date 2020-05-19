@@ -25,6 +25,8 @@ class PostController extends Controller
         $post = $user->posts()->create([
             'content' => $request->input('content'),
         ]);
+
+        $post->load('user:id,name,username');
         return $post;
     }
 
@@ -35,6 +37,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $post->load('user:id,name,username');
         return $post;
     }
 

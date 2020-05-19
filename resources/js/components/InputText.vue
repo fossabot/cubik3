@@ -1,12 +1,12 @@
 <template>
     <div>
-        <label class="block text-gray-700 text-sm font-bold mb-2" :for="id">
+        <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" :for="id">
             {{ label }}
         </label>
-        <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:z-10"
+        <input class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:z-10 dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400"
             :class="{
                 'border-red-500 focus:shadow-outline-red': error,
-                'border-gray-300 focus:border-blue-300 focus:shadow-outline-blue': !error,
+                'border-gray-300 dark:border-gray-600 focus:border-blue-300 focus:shadow-outline-blue': !error,
             }"
             :id="id"
             :type="type"

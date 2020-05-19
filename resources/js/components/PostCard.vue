@@ -1,22 +1,22 @@
 <template>
-    <div class="rounded border p-3">
+    <div class="rounded border dark:border-gray-600 p-3">
         <div class="flex items-center mb-4">
             <router-link class="mr-3"
                 :to="`/@${post.user.username}`">
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" :alt="`Avatar of ${post.user.name}`">
             </router-link>
             <div class="text-sm">
-                <router-link class="text-gray-900 leading-none"
+                <router-link class="text-gray-900 dark:text-gray-100 leading-none"
                     :to="`/@${post.user.username}`">
                     {{ post.user.name }}
                 </router-link>
-                <router-link class="block text-gray-600"
+                <router-link class="block text-gray-600 dark:text-gray-400"
                     :to="`/posts/${post.id}`">
                     {{ postDate }}
                 </router-link>
             </div>
         </div>
-        <div v-text="post.content"></div>
+        <div class="mb-2" v-text="post.content"></div>
     </div>
 </template>
 

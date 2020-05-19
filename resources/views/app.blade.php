@@ -11,7 +11,7 @@
     <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="dark:bg-gray-900 dark:text-gray-200">
     <div id="app">
         <app-nav></app-nav>
         <router-view></router-view>

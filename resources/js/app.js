@@ -1,11 +1,9 @@
-import _ from 'lodash';
 import axios from 'axios';
 import Vue from 'vue';
 import router from './router';
 import store from './vuex-store';
 
 // Make basic libraries accessible globally
-window._ = _;
 window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Vue = Vue;

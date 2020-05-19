@@ -2,12 +2,12 @@
     <div class="container py-4 lg:py-6 mb-8">
         <div class="max-w-md w-full mx-auto">
             <div>
-                <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+                <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900 dark:text-gray-300">
                     Create Account
                 </h2>
-                <p class="mt-2 text-center text-sm leading-5 text-gray-600">
+                <p class="mt-2 text-center text-sm leading-5 text-gray-600 dark:text-gray-400">
                     Or
-                    <router-link to="/login" class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    <router-link to="/login" class="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150 dark:text-blue-500 dark:hover:text-blue-400">
                         sign in
                     </router-link>
                 </p>
@@ -102,6 +102,10 @@ export default {
                     this.usernameError = errors.username ? errors.username[0] : null;
                     this.emailError = errors.email ? errors.email[0] : null;
                     this.passwordError = errors.password ? errors.password[0] : null;
+                    if (this.passwordError) {
+                        this.password = '';
+                        this.passwordConfirmation = '';
+                    }
                 } else {
                     this.nameError = 'An unknown error occurred signing in. Please try again.';
                 }

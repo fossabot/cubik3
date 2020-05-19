@@ -1,7 +1,8 @@
 <template>
     <div class="container py-4 lg:py-6">
         <p class="text-lg">Hello, {{ user.name }}!</p>
-        <post-form class="mt-3" />
+        <post-form class="mt-3"
+            @newPost="addNewPost" />
         <div v-if="loading">
             <post-card-placeholder class="my-4 lg:my-5 opacity-100" />
             <post-card-placeholder class="my-4 lg:my-5 opacity-75" />
@@ -44,6 +45,9 @@ export default {
                     console.error(error);
                 });
             // TODO: fetch more posts when scrolling
+        },
+        addNewPost(post) {
+            this.posts.unshift(post);
         },
     },
     mounted() {
