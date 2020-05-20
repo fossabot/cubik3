@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-4 lg:py-6 mb-8">
+    <div class="container py-4 md:py-6 mb-8">
         <div class="max-w-md w-full mx-auto">
             <div>
                 <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900 dark:text-gray-300">

@@ -64,7 +64,7 @@ class User extends Authenticatable
     public function getGravatarAttribute()
     {
         $hash = md5($this->email);
-        return "https://www.gravatar.com/avatar/$hash";
+        return "https://www.gravatar.com/avatar/$hash?s=256&d=mp";
     }
 
     /**
@@ -89,6 +89,18 @@ class User extends Authenticatable
     public function followers()
     {
         return $this->belongsToMany(User::class, 'user_follows', 'followed_user_id', 'user_id');
+    }
+
+    /**
+     * Check if this user is following another user.
+     */
+    public function isFollowing(User $user): bool
+    {
+        return $this->following()
+            ->newPivotStatement()
+            ->where('user_id', $this->id)
+            ->where('followed_user_id', $user->id)
+            ->count() ? true : false;
     }
 
     /**

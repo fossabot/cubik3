@@ -10,13 +10,13 @@
                 ref="content"
                 v-model="content"
                 placeholder="What's up?"
-                @keyup.ctrl.enter="submit"
-                @keyup.meta.enter="submit"
+                @keyup.ctrl.enter.prevent="submit"
+                @keyup.meta.enter.prevent="submit"
             ></textarea>
         </div>
-        <button type="submit" class="group py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+        <FormBtn type="submit" primary>
             Post
-        </button>
+        </FormBtn>
     </form>
 </template>
 

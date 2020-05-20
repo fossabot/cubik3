@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center py-5 md:py-16 lg:py-24 px-4">
+    <div class="text-center py-5 md:py-16 md:py-24 px-4">
         <h1 class="text-4xl font-extrabold tracking-tight text-blue-600 mb-4 md:mb-6 sm:text-5xl sm:leading-none md:text-6xl dark:text-blue-500">
             Welcome
         </h1>

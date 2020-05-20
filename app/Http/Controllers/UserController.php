@@ -15,7 +15,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        /** @var User $me */
+        $me = Auth::user();
+        return [
+            'user' => $user,
+            'following' => $me ? $me->isFollowing($user) : false,
+        ];
     }
 
     /**
@@ -27,7 +32,7 @@ class UserController extends Controller
     {
         /** @var User $me */
         $me = Auth::user();
-        $me->following()->attach($user->id);
+        $me->following()->syncWithoutDetaching([$user->id]);
         $user->notify(new NewFollower($me));
         return [
             'id' => $user->id,
