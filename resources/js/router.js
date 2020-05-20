@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 import store from './vuex-store';
 
 import Error404 from './pages/Error404.vue';
-import Home from './pages/Home.vue';
 import Index from './pages/Index.vue';
 import Login from './pages/Login.vue';
 import Register from './pages/Register.vue';
@@ -18,7 +17,6 @@ const router = new VueRouter({
         {
             path: '/',
             component: Index,
-            meta: { unauthorized: true },
         },
         {
             path: '/login',
@@ -31,11 +29,6 @@ const router = new VueRouter({
             meta: { unauthorized: true },
         },
         {
-            path: '/home',
-            component: Home,
-            meta: { requiresAuth: true },
-        },
-        {
             path: '/@:user',
             component: User,
         },
@@ -46,6 +39,13 @@ const router = new VueRouter({
             component: Error404,
         },
     ],
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        } else {
+            return { x: 0, y: 0 };
+        }
+    },
 });
 
 // Before entering routes, check authentication requirements
