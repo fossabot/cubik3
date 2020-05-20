@@ -19,6 +19,10 @@ Route::post('/logout', 'AuthController@logout');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/@{user:username}', 'UserController@show');
+    Route::post('/users/@{user:username}/follow', 'UserController@follow');
+    Route::post('/users/@{user:username}/unfollow', 'UserController@unfollow');
+    Route::get('/users/@{user:username}/following', 'UserController@following');
+    Route::get('/users/@{user:username}/followers', 'UserController@followers');
 
     Route::post('/posts', 'PostController@store');
     Route::get('/posts/home', 'PostController@showHome');
