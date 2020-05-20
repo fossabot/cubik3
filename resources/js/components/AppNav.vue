@@ -27,7 +27,7 @@
                         </div>
                         <div class="hidden sm:block sm:ml-6">
                             <div class="flex">
-                                <router-link :to="user ? '/home' : '/'" class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" exact-active-class="text-white bg-gray-900">
+                                <router-link to="/" class="px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" exact-active-class="text-white bg-gray-900">
                                     Home
                                 </router-link>
                             </div>
@@ -72,7 +72,7 @@
 
             <div class="sm:hidden" v-show="open">
                 <div class="px-2 pt-2 pb-3" @click="open = false">
-                    <router-link to="/home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" active-class="text-white bg-gray-900">
+                    <router-link to="/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" active-class="text-white bg-gray-900">
                         Home
                     </router-link>
                 </div>

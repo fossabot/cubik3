@@ -88,7 +88,7 @@ export default {
             }).then(async response => {
                 const user = response.data;
                 this.$store.commit('setUser', user);
-                let to = '/home';
+                let to = '/';
                 if (this.$route.query.redirect) {
                     to = this.$route.query.redirect;
                 }
