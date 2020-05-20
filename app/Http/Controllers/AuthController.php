@@ -23,6 +23,7 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:10', 'confirmed'],
         ]);
 
+        /** @var User $user */
         $user = User::create([
             'name' => $request->input('name'),
             'username' => $request->input('username'),
@@ -33,6 +34,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
+        $user->makeVisible(['email']);
         return response()->json($user, 201);
     }
 
@@ -46,7 +48,10 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt($credentials, true)) {
-            return Auth::user();
+            /** @var User $user */
+            $user = Auth::user();
+            $user->makeVisible(['email']);
+            return $user;
         }
 
         $this->incrementLoginAttempts($request);

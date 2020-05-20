@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\NewFollower;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -14,7 +15,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->makeHidden(['email', 'email_verified_at', 'created_at', 'updated_at']);
         return $user;
     }
 
@@ -28,6 +28,7 @@ class UserController extends Controller
         /** @var User $me */
         $me = Auth::user();
         $me->following()->attach($user->id);
+        $user->notify(new NewFollower($me));
         return [
             'id' => $user->id,
             'following' => true,
@@ -57,7 +58,6 @@ class UserController extends Controller
      */
     public function following(User $user)
     {
-        // TODO: limit to publicly showable fields
         return $user->following()->paginate(30);
     }
 
@@ -68,7 +68,6 @@ class UserController extends Controller
      */
     public function followers(User $user)
     {
-        // TODO: limit to publicly showable fields
         return $user->followers()->paginate(30);
     }
 }

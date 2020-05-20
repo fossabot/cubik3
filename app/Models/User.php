@@ -6,6 +6,20 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $username
+ * @property string $email
+ * @property string $password
+ * @property string $gravatar
+ * @property \Carbon $email_verified_at
+ * @property \Carbon $created_at
+ * @property \Carbon $updated_at
+ * @property \Post[] $posts
+ * @property \User[] $following
+ * @property \User[] $followers
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -26,6 +40,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+        'email', 'email_verified_at', 'created_at', 'updated_at',
     ];
 
     /**

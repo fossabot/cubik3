@@ -13,8 +13,11 @@ class AppController extends Controller
      */
     public function app()
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->makeVisible(['email']);
         return view('app', [
-            'user' => Auth::user(),
+            'user' => $user,
         ]);
     }
 }

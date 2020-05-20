@@ -4,6 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $content
+ * @property \User $user
+ * @property \Carbon $created_at
+ * @property \Carbon $updated_at
+ */
 class Post extends Model
 {
     /**
