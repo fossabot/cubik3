@@ -1,14 +1,19 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: [],
+  purge: [
+    './resources/**/*.blade.php',
+    './resources/**/*.vue',
+  ],
   theme: {
+    screens: {
+      sm: '640px',
+      md: '768px',
+      dark: {'raw': '(prefers-color-scheme: dark)'},
+    },
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-      },
-      screens: {
-        dark: {'raw': '(prefers-color-scheme: dark)'},
       },
     },
     container: {

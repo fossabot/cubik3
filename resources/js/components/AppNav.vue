@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav class="sticky top-0 bg-gray-800">
-            <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+            <div class="container">
                 <div class="relative flex items-center justify-between h-16">
                     <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         <!-- Mobile menu button-->
@@ -83,28 +83,30 @@
             v-show="userOpen"
             v-if="user"
         ></div>
-        <transition
-            enter-active-class="transition ease-out duration-100"
-            enter-class="transform opacity-0 scale-95"
-            enter-to-class="transform opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75"
-            leave-class="transform opacity-100 scale-100"
-            leave-to-class="transform opacity-0 scale-95">
-            <div v-if="user" v-show="userOpen" class="origin-top-right absolute right-0 -mt-2 mr-8 w-48 rounded-md shadow-lg z-10">
-                <div class="py-1 rounded-md bg-white shadow-xs dark:bg-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" @click="userOpen = false">
-                    <router-link :to="`/@${user.username}`" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        Your Profile
-                    </router-link>
-                    <router-link to="/settings" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        Settings
-                    </router-link>
-                    <button class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        @click="logOut">
-                        Sign out
-                    </button>
+        <div class="container relative">
+            <transition
+                enter-active-class="transition ease-out duration-100"
+                enter-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95">
+                <div v-if="user" v-show="userOpen" class="origin-top-right absolute right-0 -mt-2 mr-3 w-48 rounded-md shadow-lg z-10">
+                    <div class="py-1 rounded-md bg-white shadow-xs dark:bg-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" @click="userOpen = false">
+                        <router-link :to="`/@${user.username}`" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Your Profile
+                        </router-link>
+                        <router-link to="/settings" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                            Settings
+                        </router-link>
+                        <button class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            @click="logOut">
+                            Sign out
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </transition>
+            </transition>
+        </div>
         <post-modal v-if="user" :show.sync="postModalOpen" dismissable />
     </div>
 </template>
