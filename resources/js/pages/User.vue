@@ -1,7 +1,7 @@
 <template>
     <div class="container py-4 md:py-6">
-        <header class="flex mb-4 flex-col md:flex-row md:items-center" v-if="user">
-            <div class="md:text-right md:flex-1 text-2xl md:text-3xl md:font-light">
+        <header class="flex mb-4 flex-col sm:flex-row sm:items-center" v-if="user">
+            <div class="sm:text-right sm:flex-1 text-2xl md:text-3xl md:font-light">
                 {{ user.name }}
             </div>
             <div class="w-32 sm:mx-6">
@@ -9,7 +9,7 @@
                     :src="user.gravatar"
                     :alt="`Avatar of ${user.name}`">
             </div>
-            <div class="md:flex-1">
+            <div class="sm:flex-1">
                 <FormBtn v-if="me && me.id === user.id">
                     Edit Profile
                 </FormBtn>

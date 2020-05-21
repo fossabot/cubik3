@@ -30,7 +30,7 @@
                 @submit.prevent="submit">
                 <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="flex items-start">
-                        <img class="w-10 h-10 rounded-full mr-3" :src="user.gravatar" :alt="`Avatar of ${user.name}`">
+                        <img class="hidden sm:block w-10 h-10 rounded-full mr-3" :src="user.gravatar" :alt="`Avatar of ${user.name}`">
                         <textarea class="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 dark:bg-gray-900 dark:text-gray-100 dark:border-gray-600 dark:placeholder-gray-400"
                             aria-label="Write a post"
                             name="content"

@@ -1,6 +1,6 @@
 <template>
     <div class="container py-4 md:py-6">
-        <p class="text-lg">Hello, {{ user.name }}!</p>
+        <p class="text-lg">Hello, {{ user.name }}! 👋</p>
         <post-form class="mt-3"
             @newPost="addNewPost" />
 
