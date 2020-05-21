@@ -44,7 +44,11 @@
                             </svg>
                         </FormBtn>
 
-                        <button class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out" aria-label="Notifications">
+                        <button class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700 transition duration-150 ease-in-out"
+                            id="notification-menu"
+                            aria-label="Notifications"
+                            aria-haspopup="true"
+                            @click="notificationsOpen = !notificationsOpen">
                             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
@@ -52,7 +56,10 @@
 
                         <!-- Profile dropdown -->
                         <div class="ml-3 relative">
-                            <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out" id="user-menu" aria-label="User menu" aria-haspopup="true"
+                            <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out"
+                                id="user-menu"
+                                aria-label="User menu"
+                                aria-haspopup="true"
                                 @click="userOpen = !userOpen">
                                 <img class="h-8 w-8 rounded-full" :src="user.gravatar" :alt="`Avatar of ${user.name}`" />
                             </button>
@@ -79,11 +86,12 @@
             </div>
         </nav>
         <div class="absolute inset-0"
-            @click="userOpen = false"
-            v-show="userOpen"
+            @click="userOpen = false; notificationsOpen = false"
+            v-show="userOpen || notificationsOpen"
             v-if="user"
         ></div>
-        <div class="container relative">
+        <div class="container relative"
+            v-if="user">
             <transition
                 enter-active-class="transition ease-out duration-100"
                 enter-class="transform opacity-0 scale-95"
@@ -91,18 +99,47 @@
                 leave-active-class="transition ease-in duration-75"
                 leave-class="transform opacity-100 scale-100"
                 leave-to-class="transform opacity-0 scale-95">
-                <div v-if="user" v-show="userOpen" class="origin-top-right absolute right-0 -mt-2 mr-3 w-48 rounded-md shadow-lg z-10">
+                <div v-show="userOpen" class="origin-top-right absolute right-0 -mt-2 mr-3 w-48 rounded-md shadow-lg z-10">
                     <div class="py-1 rounded-md bg-white shadow-xs dark:bg-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="user-menu" @click="userOpen = false">
-                        <router-link :to="`/@${user.username}`" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        <router-link :to="`/@${user.username}`" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white">
                             Your Profile
                         </router-link>
-                        <router-link to="/settings" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        <router-link to="/settings" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white">
                             Settings
                         </router-link>
-                        <button class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        <button class="block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out dark:text-gray-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:hover:text-white"
                             @click="logOut">
                             Sign out
                         </button>
+                    </div>
+                </div>
+            </transition>
+            <transition
+                enter-active-class="transition ease-out duration-100"
+                enter-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95">
+                <div v-show="notificationsOpen" class="origin-top absolute right-0 -mt-2 mr-3 sm:mr-0 w-48 rounded-md shadow-lg z-10">
+                    <div class="py-1 rounded-md bg-white shadow-xs dark:bg-gray-700 h-48 flex flex-col overflow-y-auto"
+                        role="menu"
+                        aria-orientation="vertical"
+                        aria-labelledby="notification-menu"
+                        @click="userOpen = false">
+                        <div v-if="notificationsLoading" class="text-center pt-20 text-gray-600 dark:text-gray-400">
+                            Just a sec&hellip;
+                        </div>
+                        <div v-else-if="notifications.length">
+                            <div v-for="notif in notifications" :key="notif.id"
+                                class="py-2 px-4">
+                                <!-- TODO: show notification detail -->
+                                <code>{{ notif.type }}</code>
+                            </div>
+                        </div>
+                        <div v-else class="text-center pt-20 text-gray-600 dark:text-gray-400">
+                            You're all caught up!
+                        </div>
                     </div>
                 </div>
             </transition>
@@ -117,10 +154,20 @@ export default {
         open: false,
         userOpen: false,
         postModalOpen: false,
+        notificationsOpen: false,
+        notifications: [],
+        notificationsLoading: true,
     }),
     computed: {
         user() {
             return this.$store.state.user;
+        },
+    },
+    watch: {
+        notificationsOpen(open) {
+            if (open) {
+                this.loadNotifications();
+            }
         },
     },
     methods: {
@@ -129,6 +176,11 @@ export default {
             this.$store.commit('setUser', null);
             this.$router.push('/');
             await axios.get('/sanctum/csrf-cookie');
+        },
+        async loadNotifications() {
+            const { data } = await axios.get('/api/notifications');
+            this.notifications = data.data;
+            this.notificationsLoading = false;
         },
     },
 };

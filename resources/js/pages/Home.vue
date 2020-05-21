@@ -34,7 +34,7 @@ export default {
     methods: {
         fetchPosts() {
             this.loading = true;
-            axios.get('/api/posts/home')
+            axios.get('/api/posts')
                 .then(response => {
                     const { data } = response;
                     this.posts = data.data;

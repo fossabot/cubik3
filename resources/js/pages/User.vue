@@ -98,7 +98,7 @@ export default {
         async toggleFollow(value) {
             const username = this.$route.params.user;
             const action = value ? 'follow' : 'unfollow';
-            axios.post(`/api/users/@${username}/${value}`)
+            axios.post(`/api/users/@${username}/${action}`)
                 .then(response => {
                     this.following = response.data.following;
                 })
