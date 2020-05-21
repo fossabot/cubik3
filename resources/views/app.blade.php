@@ -13,7 +13,7 @@
 </head>
 <body class="dark:bg-gray-900 dark:text-gray-200">
     <div id="app">
-        <app-nav></app-nav>
+        <app-nav logo="{{ config('app.logo') }}"></app-nav>
         <router-view></router-view>
     </div>
     @if ($user)
