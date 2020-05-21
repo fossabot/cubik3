@@ -112,10 +112,13 @@
             </transition>
         </div>
         <post-modal v-if="user" :show.sync="postModalOpen" dismissable />
+        <hotkey-modal :show.sync="hotkeyModalOpen" />
     </div>
 </template>
 
 <script>
+import Mousetrap from 'mousetrap';
+
 export default {
     props: {
         logo: String,
@@ -126,6 +129,7 @@ export default {
         notificationsOpen: false,
         notifications: [],
         notificationsLoading: true,
+        hotkeyModalOpen: false,
     }),
     computed: {
         user() {
@@ -151,6 +155,43 @@ export default {
             this.notifications = data.data;
             this.notificationsLoading = false;
         },
+    },
+    mounted() {
+        // Bind global hotkeys
+        Mousetrap.bind('esc', () => {
+            this.userOpen = false;
+            this.postModalOpen = false;
+            this.notificationsOpen = false;
+            this.hotkeyModalOpen = false;
+        });
+
+        // Modals
+        Mousetrap.bind('?', () => {
+            this.hotkeyModalOpen = !this.hotkeyModalOpen;
+        });
+        Mousetrap.bind('n', (e) => {
+            this.postModalOpen = true;
+            e.preventDefault();
+        });
+
+        // Menus
+        Mousetrap.bind('o', () => {
+            this.notificationsOpen = !this.notificationsOpen;
+        });
+        Mousetrap.bind('u', (e) => {
+            this.userOpen = true;
+            e.preventDefault();
+        });
+
+        // Navigation
+        Mousetrap.bind('g h', () => {
+            this.$router.push('/');
+        });
+        Mousetrap.bind('g p', () => {
+            if (this.user) {
+                this.$router.push(`/@${this.user.username}`);
+            }
+        });
     },
 };
 </script>

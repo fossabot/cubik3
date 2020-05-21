@@ -85,6 +85,7 @@ export default {
                     this.$refs.content.focus();
                 })
             } else {
+                this.$refs.content.blur();
                 this.hideRootTimeout = window.setTimeout(() => {
                     this.showRoot = false;
                 }, 300);
