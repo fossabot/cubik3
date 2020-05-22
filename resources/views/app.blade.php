@@ -8,8 +8,9 @@
     <title>{{ config('app.name', 'Cubik3') }}</title>
 
     <script src="{{ mix('/js/app.js') }}" defer></script>
-    <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link href="https://rsms.me/inter/inter.css" rel="preload" as="style" />
+    <link href="https://rsms.me/inter/inter.css" rel="stylesheet" media="print" onload="this.media='all'">
 </head>
 <body class="dark:bg-gray-900 dark:text-gray-200">
     <div id="app">
