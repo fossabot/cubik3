@@ -12,7 +12,7 @@
     <link href="https://rsms.me/inter/inter.css" rel="preload" as="style" />
     <link href="https://rsms.me/inter/inter.css" rel="stylesheet" media="print" onload="this.media='all'">
 </head>
-<body class="dark:bg-gray-900 dark:text-gray-200">
+<body class="dark:bg-ngray-900 dark:text-gray-200">
     <div id="app">
         <app-nav logo="{{ config('app.logo') }}"></app-nav>
         <router-view></router-view>

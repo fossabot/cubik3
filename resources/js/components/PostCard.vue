@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded border dark:border-gray-600 p-3">
+    <div class="rounded border dark:border-ngray-600 p-3">
         <div class="flex items-center mb-4">
             <router-link class="mr-3"
                 :to="`/@${post.user.username}`">
